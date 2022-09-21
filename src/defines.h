@@ -3,8 +3,8 @@
 
 #include "types.h"
 
-#define ALL_POKES 991
-#define DEX_POKES 721
+#define ALL_POKES 1200
+#define DEX_POKES 999
 #define HOENN_DEX_POKES 202
 #define EVO_PER_POKE 5
 
@@ -16,6 +16,12 @@
 #include "locations.h"
 #include "./defines/pokes.h"
 
+#define _(x) x
+#define min(a, b) ((a) < (b) ? (a) : (b))
+#define max(a, b) ((a) >= (b) ? (a) : (b))
+
+#define TRUE 1
+#define FALSE 0
 enum dex_mode{
     hoenn = 0,
     national = 1

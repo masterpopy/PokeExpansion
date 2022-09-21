@@ -26,7 +26,35 @@ MoveTutorComp_repoint = True #same as above but movetutor table
 rom_name = 'rom.gba'
 new_rom_name = 'test.gba'
 offset_file = 'offsets.ini'
-
+'''
+base_stats=0x1bc
+poke_front_img=0x128
+poke_back_img=0x12c
+poke_sprite_pal=0x130
+shiny_sprite_pal=0x134
+icon_img=0x138
+icon_pal=0x13c
+poke_names=0x144
+tm_hm_comp_table=0x6e060       
+move_tutor_table=0x1b2390      
+dex_table=0xbfa20
+evo_table=0x6d140
+enymyyTable=0xa5f54
+playeryTable=0xa5ebc
+learnset_table=0x6e3b4
+front_animation_table=0x6ee7c  
+anim_delay_table=0x6eddc       
+footprint_table=0xc0dbc        
+crytable1=0xa35ec
+crytable2=0xa35dc
+altitude_table=0xa5ff4
+auxialary_cry_table=0x6d534    
+nationaldex_table=0x6d4bc      
+hoenn_to_national_table=0x6d494
+hoenn_dex_table=0x6d3fc        
+back_anim_table=0x17f488
+frame_control_table=0x5e7bc
+'''
 table_names = ["base_stats", "poke_front_img", "poke_back_img", "poke_sprite_pal", "shiny_sprite_pal", "icon_img", "icon_pal", "poke_names", "tm_hm_comp_table", "move_tutor_table", "dex_table", "evo_table", "enymyyTable", "playeryTable", "learnset_table", "front_animation_table", "anim_delay_table", "footprint_table", "crytable1", "crytable2", "altitude_table", "auxialary_cry_table", "nationaldex_table", "hoenn_to_national_table", "hoenn_dex_table", "back_anim_table", "frame_control_table"]
 table_ptrs = [0x0001BC, 0x000128, 0x00012C, 0x000130, 0x000134, 0x000138, 0x00013C, 0x000144, 0x06E060, 0x1B2390, 0x0BFA20, 0x06D140, 0x0A5F54, 0x0A5EBC, 0x06E3B4, 0x06EE7C, 0x06EDDC, 0x0C0DBC, 0x0A35EC, 0x0A35DC, 0x0A5FF4, 0x06D534, 0x06D4BC, 0x06D494, 0x06D3FC, 0x17F488, 0x05E7BC]
 sizeofs = [0x1C, 8, 8, 8, 8, 4, 1, 11, 8, 4, 0x20, evos_per_entry * 8, 4, 4, 4, 1, 1, 4, 0xC, 0xC, 1, 2, 2, 2, 2, 1, 4]
