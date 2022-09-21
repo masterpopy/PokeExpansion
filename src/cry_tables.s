@@ -718,7 +718,8 @@ gCryTable::
 	cry Cry_Goomy
 	cry Cry_Sliggoo
 	cry Cry_Goodra
-	cry_uncomp Cry_Klefki
+	@cry_uncomp Cry_Klefki
+	cry Cry_Bulbasaur
 	cry Cry_Phantump
 	cry Cry_Trevenant
 	cry Cry_Pumpkaboo
@@ -1992,7 +1993,8 @@ gCryTable_Reverse::
 	cry_reverse Cry_Goomy
 	cry_reverse Cry_Sliggoo
 	cry_reverse Cry_Goodra
-	cry_reverse_uncomp Cry_Klefki
+	@cry_reverse_uncomp Cry_Klefki
+	cry_reverse Cry_Bulbasaur
 	cry_reverse Cry_Phantump
 	cry_reverse Cry_Trevenant
 	cry_reverse Cry_Pumpkaboo

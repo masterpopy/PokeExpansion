@@ -6,9 +6,10 @@
 #include "defines/moves.h"
 #include "defines/party_menu.h"
 
-struct LevelUpMove {
-	u16 level;
-	u16 move;
+struct LevelUpMove
+{
+    u16 move;
+    u16 level;
 };
 
 struct BaseStats

@@ -27,7 +27,7 @@ struct PokedexEntry
 #define HOENN_TO_NATIONAL(name)     [HOENN_DEX_##name - 1] = NATIONAL_DEX_##name
 
 // Assigns all species to the Hoenn Dex Index (Summary No. for Hoenn Dex)
-static const u16 sSpeciesToHoennPokedexNum[NUM_SPECIES - 1] =
+const u16 sSpeciesToHoennPokedexNum[NUM_SPECIES - 1] =
 {
     SPECIES_TO_HOENN(TREECKO),
     SPECIES_TO_HOENN(GROVYLE),
@@ -243,7 +243,7 @@ static const u16 sSpeciesToHoennPokedexNum[NUM_SPECIES - 1] =
 };
 
 // Assigns all species to the National Dex Index (Summary No. for National Dex)
-static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
+const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
 {
     SPECIES_TO_NATIONAL(BULBASAUR),
     SPECIES_TO_NATIONAL(IVYSAUR),
@@ -1519,7 +1519,7 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
 };
 
 // Assigns all Hoenn Dex Indexes to a National Dex Index
-static const u16 sHoennToNationalOrder[HOENN_DEX_COUNT - 1] =
+const u16 sHoennToNationalOrder[HOENN_DEX_COUNT - 1] =
 {
     HOENN_TO_NATIONAL(TREECKO),
     HOENN_TO_NATIONAL(GROVYLE),
@@ -1739,7 +1739,7 @@ static const u16 sHoennToNationalOrder[HOENN_DEX_COUNT - 1] =
 #if P_ENABLE_DEBUG == TRUE
 const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
 #else
-static const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
+const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
 #endif
 {
     [SPECIES_BULBASAUR - 1]     = ANIM_V_JUMPS_H_JUMPS,
@@ -2676,7 +2676,7 @@ static const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_ARCEUS_FAIRY - 1]    = ANIM_CIRCULAR_VIBRATE,
 };
 
-static const u8 sMonAnimationDelayTable[NUM_SPECIES - 1] =
+const u8 sMonAnimationDelayTable[NUM_SPECIES - 1] =
 {
     [SPECIES_BLASTOISE - 1]  = 50,
     [SPECIES_WEEDLE - 1]     = 10,
