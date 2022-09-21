@@ -25,8 +25,8 @@ struct crytable{
     u16 field_A;
 };
 
-extern struct crytable *(crytable1_ptr)[DEX_POKES];
-extern struct crytable *(crytable2_ptr)[DEX_POKES];
+extern struct crytable gCryTable[];
+extern struct crytable gCryTable_Reverse[];
 
 struct poke_basestats{
     u8 base_hp;

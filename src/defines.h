@@ -3,7 +3,7 @@
 
 #include "types.h"
 
-#define ALL_POKES 1200
+#define ALL_POKES (898 + 308 + 1)
 #define DEX_POKES 999
 #define HOENN_DEX_POKES 202
 #define EVO_PER_POKE 5

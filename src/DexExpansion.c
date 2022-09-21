@@ -372,12 +372,7 @@ u16 is_using_two_frame_anim(u16 species)
 
 struct crytable* get_cry_ptr(u16 ID, u8 cry_2)
 {
-    struct crytable* table_ptr;
-    if (cry_2)
-        table_ptr = (*crytable2_ptr);
-    else
-        table_ptr = (*crytable1_ptr);
-    return &table_ptr[ID];
+    return cry_2 ? &gCryTable_Reverse[ID] : &gCryTable[ID];
 }
 
 u16 get_lowest_evo_stage(u16 species)
