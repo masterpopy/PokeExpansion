@@ -13,7 +13,7 @@ u8 get_set_dex_flags(u16 national_no, u8 switchID)
         3 = set caught
     */
     u16 flagID = national_no / 8;
-    u8 flagByte = __umodsi3(national_no, 8);
+    u8 flagByte = national_no % 8;
     u8* flagPtrSeen = &new_saveblock.seen_flags[flagID].flag;
     u8* flagPtrCaught = &new_saveblock.caught_flags[flagID].flag;
     u8 bit = bits_table[flagByte];
@@ -217,14 +217,14 @@ u16 hoenn_pokes_count(u8 mode)
     return count;
 }
 
+extern u16 sSpeciesToNationalPokedexNum[];
 u16 national_to_species(u16 national_no)
 {
     if (national_no)
     {
-        u16** table = (u16**) (0x0806D448);
-        for (u16 i = 0; i < (DEX_POKES + 54); i++)
+        for (u16 i = 0; i < ALL_POKES; i++)
         {
-            if (*(*table + i) == national_no)
+            if (sSpeciesToNationalPokedexNum[i] == national_no)
                 return i + 1;
         }
     }
