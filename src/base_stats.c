@@ -49,7 +49,5 @@ struct BaseStats
 #include "data/egg_moves.h"
 #include "data/level_up_learnsets.h"
 #include "data/level_up_learnset_pointers.h"
-#include "data/pokedex_text.h"
-#include "data/pokedex_entries.h"
 #include "data/tutor_learnsets.h"
 #include "data/tmhm_learnsets.h"
