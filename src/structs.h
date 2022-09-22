@@ -28,45 +28,45 @@ struct crytable{
 extern struct crytable gCryTable[];
 extern struct crytable gCryTable_Reverse[];
 
-struct poke_basestats{
-    u8 base_hp;
-    u8 base_atk;
-    u8 base_def;
-    u8 base_spd;
-    u8 base_spatk;
-    u8 base_spdef;
-    u8 type1;
-    u8 type2;
-    u8 catch_rate;
-    u8 exp_yield;
-    u16 evs_hp : 2;
-    u16 evs_atk : 2;
-    u16 evs_def : 2;
-    u16 evs_spd : 2;
-    u16 evs_spatk : 2;
-    u16 evs_spdef : 2;
-    u16 unused : 4;
-    u16 item1;
-    u16 item2;
-    u8 gender_ratio;
-    u8 hatching;
-    u8 friendship;
-    u8 exp_curve;
-    u8 egg_group1;
-    u8 egg_group2;
-    u8 ability1;
-    u8 ability2;
-    u8 safari_flee_rate;
-    u8 dex_colour;
-    u8 padding1;
-    u8 padding2;
+struct BaseStats
+{
+ /* 0x00 */ u8 baseHP;
+ /* 0x01 */ u8 baseAttack;
+ /* 0x02 */ u8 baseDefense;
+ /* 0x03 */ u8 baseSpeed;
+ /* 0x04 */ u8 baseSpAttack;
+ /* 0x05 */ u8 baseSpDefense;
+ /* 0x06 */ u8 type1;
+ /* 0x07 */ u8 type2;
+ /* 0x08 */ u8 catchRate;
+ /* 0x09 */ u16 expYield;
+ /* 0x0A */ u16 evYield_HP:2;
+ /* 0x0A */ u16 evYield_Attack:2;
+ /* 0x0A */ u16 evYield_Defense:2;
+ /* 0x0A */ u16 evYield_Speed:2;
+ /* 0x0B */ u16 evYield_SpAttack:2;
+ /* 0x0B */ u16 evYield_SpDefense:2;
+ /* 0x0C */ u16 item1;
+ /* 0x0E */ u16 item2;
+ /* 0x10 */ u8 genderRatio;
+ /* 0x11 */ u8 eggCycles;
+ /* 0x12 */ u8 friendship;
+ /* 0x13 */ u8 growthRate;
+ /* 0x14 */ u8 eggGroup1;
+ /* 0x15 */ u8 eggGroup2;
+            u8 bodyColor : 6;
+            u8 noFlip : 1;
+            u8 flags : 1;
+ /* 0x16 */ struct {
+	 			 u32 a1:10;
+				 u32 a2:10;
+				 u32 a3:10;
+ 			} abilities;
 };
 
-extern struct poke_basestats (*basestats_table)[ALL_POKES];
-
-extern u8 (*poke_name_table)[ALL_POKES][11];
-
-struct first_letter{
+extern const u8 gSpeciesNames[][11];
+extern const struct BaseStats gBaseStats[];
+struct first_letter {
     u8 capitalID;
     u8 howmuch1;
     u8 smalllID;
@@ -254,15 +254,13 @@ struct image_resource{
 
 extern struct object objects[64];
 
-struct evolution_sub{
-    u8 method;
-    u16 paramter;
-    u16 poke;
-    u8 pad1;
-    u8 pad2;
+struct Evolution
+{
+    u16 method;
+    u16 param;
+    u16 targetSpecies;
 };
 
-extern struct evolution_sub (*evo_table)[ALL_POKES][EVOS_PER_MON];
-
+extern const struct Evolution gEvolutionTable[][EVOS_PER_MON];
 
 #endif /* B_STRUCTS */

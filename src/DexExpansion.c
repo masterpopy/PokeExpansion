@@ -64,7 +64,6 @@ void clean_pokestates(u16 from, u16 to)
         *((u16*)state + 1) = 0;
         from++;
     }
-    return;
 }
 
 void set_pokes_in_dex(u16 max_pokes, enum dex_mode mode,const u16 table[], u8 reverse)
@@ -101,7 +100,6 @@ void set_pokes_in_dex(u16 max_pokes, enum dex_mode mode,const u16 table[], u8 re
         }
     }
     clean_pokestates(dex_view_ptr->max_down, DEX_POKES);
-    return;
 }
 
 u16 get_pokestate_national_dex_no(u16 pokestateID)
@@ -194,7 +192,6 @@ void poke_set_to_viewing(u8 taskID, void* function, u8 fillFF)
         if (fillFF)
             dex_view_ptr->cur_poke_objID = 0xFFFF;
     }
-    return;
 }
 
 void poke_set_to_viewing_normal(u8 taskID)
@@ -288,7 +285,7 @@ u16 dex_get_searched_pokes(enum dex_mode mode, enum dex_order order, u8 name, u8
         {
             struct pokedex_state* seen_in = get_poke_state_ptr(*pokes_in);
             state = get_poke_state_ptr(i);
-            u8 poke1letter = (*poke_name_table)[national_to_species(state->national_dex_no)][0];
+            u8 poke1letter = gSpeciesNames[national_to_species(state->national_dex_no)][0];
             struct first_letter* letter = &dex_firstletter_table[name];
             //check capital letter
             u8 minC = letter->capitalID;
@@ -312,7 +309,7 @@ u16 dex_get_searched_pokes(enum dex_mode mode, enum dex_order order, u8 name, u8
         {
             struct pokedex_state* seen_in = get_poke_state_ptr(*pokes_in);
             state = get_poke_state_ptr(i);
-            if ((*basestats_table)[national_to_species(state->national_dex_no)].dex_colour == colour)
+            if (gBaseStats[national_to_species(state->national_dex_no)].bodyColor == colour)
             {
                 *(u32*)(seen_in) = *(u32*)(state);
                 *pokes_in += 1;
@@ -328,8 +325,8 @@ u16 dex_get_searched_pokes(enum dex_mode mode, enum dex_order order, u8 name, u8
         {
             struct pokedex_state* seen_in = get_poke_state_ptr(*pokes_in);
             state = get_poke_state_ptr(i);
-            u8 poketype1 = (*basestats_table)[national_to_species(state->national_dex_no)].type1;
-            u8 poketype2 = (*basestats_table)[national_to_species(state->national_dex_no)].type2;
+            u8 poketype1 = gBaseStats[national_to_species(state->national_dex_no)].type1;
+            u8 poketype2 = gBaseStats[national_to_species(state->national_dex_no)].type2;
             u8 get = 0;
             if (state->caught)
             {
@@ -377,12 +374,12 @@ struct crytable* get_cry_ptr(u16 ID, u8 cry_2)
 
 u16 get_lowest_evo_stage(u16 species)
 {
-    for (u16 i = 1; i < ALL_POKES; i++)
+    for (int i = 1; i < ALL_POKES; i++)
     {
-        struct evolution_sub* evo = (*evo_table)[i];
+        const struct Evolution* evo = gEvolutionTable[i];
         for (u8 j = 0; j < EVOS_PER_MON; j++)
         {
-            if (evo[j].poke == species)
+            if (evo[j].targetSpecies ==  i && evo[j].method < 100)
             {
                 return get_lowest_evo_stage(i);
             }
@@ -407,4 +404,9 @@ u16 species_to_dex(u16 species)
         }
     }
     return index;
+}
+
+u8 IsMonSpriteNotFlipped(u16 species)
+{
+    return gBaseStats[species].noFlip;
 }

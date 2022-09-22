@@ -27,6 +27,7 @@ C_OBJS := $(patsubst $(SRC_DIR)/%.c,$(BUILDDIR)/%.o,$(C_SRCS))
 ASM_OBJS := $(patsubst $(SRC_DIR)/%.s,$(BUILDDIR)/%.o,$(ASM_SRCS))
 
 GCC := arm-none-eabi-gcc
+export CC = arm-none-eabi-gcc
 CPP := arm-none-eabi-cpp
 AS := arm-none-eabi-as
 LD := arm-none-eabi-ld
@@ -45,8 +46,8 @@ OBJCOPY = arm-none-eabi-objcopy
 
 all : $(ROM)
 
-CFLAGS = -mthumb -mno-thumb-interwork -mcpu=arm7tdmi -I $(SRC_DIR) -fno-inline -march=armv4t -Wall -O2
-CPPFLAGS := -Wno-trigraphs
+CFLAGS = -mthumb -mno-thumb-interwork -mcpu=arm7tdmi -I $(SRC_DIR) -fno-inline -march=armv4t -Wall -O5
+CPPFLAGS := -Wno-trigraph
 ASFLAGS = -mcpu=arm7tdmi -mthumb -I $(SRC_DIR)
 
 $(shell mkdir -p $(BUILDDIR))
@@ -67,6 +68,7 @@ c_dep = $(shell $(SCANINC) $(SRC_DIR)/$*.c)
 %.lz: % ; $(GFX) $< $@
 %.rl: % ; $(GFX) $< $@
 
+LIBPATH := -L "$(dir $(shell $(CC) -mthumb -print-file-name=libgcc.a))" -L "$(dir $(shell $(CC) -mthumb -print-file-name=libc.a))"
 
 $(BUILDDIR)/%.o : $(SRC_DIR)/%.c $$(c_dep)
 	$(CPP) $(CPPFLAGS) $< | $(PREPROC) $< charmap.txt -i | $(GCC) $(CFLAGS) -o $(BUILDDIR)/$*.o -x c -c -
@@ -75,6 +77,7 @@ $(BUILDDIR)/%.o : $(SRC_DIR)/%.s
 	$(PREPROC) $< charmap.txt | $(AS) $(ASFLAGS) -o $(BUILDDIR)/$*.o
 
 $(ELF): $(C_OBJS) $(ASM_OBJS)
+	#$(LD) BPEE.ld -T linker.ld -Map build/a.map $(LIBPATH)  -o $@ $^ -lgcc
 	$(LD) BPEE.ld -T linker.ld -o $@ $^
 
 $(ROM): $(ELF)

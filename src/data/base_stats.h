@@ -2,7 +2,7 @@
 // 255 (MON_GENDERLESS) is reserved for genderless Pokémon.
 #define PERCENT_FEMALE(percent) min(254, ((percent * 255) / 100))
 
-const struct BaseStats gBaseStats[] =
+const struct BaseStats gBaseStats[NUM_SPECIES] =
 {
     [SPECIES_NONE] = {0},
 
