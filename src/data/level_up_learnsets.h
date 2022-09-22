@@ -1,5 +1,5 @@
 #define LEVEL_UP_MOVE(lvl, moveLearned) {.move = moveLearned, .level = lvl}
-#define LEVEL_UP_END      {1023}
+#define LEVEL_UP_END      {0xFFFF}
 
 static const struct LevelUpMove sBulbasaurLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),

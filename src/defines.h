@@ -6,7 +6,7 @@
 #define ALL_POKES (898 + 308 + 1)
 #define DEX_POKES 999
 #define HOENN_DEX_POKES 202
-#define EVO_PER_POKE 5
+#define EVOS_PER_MON 10
 
 #define POK_DIV8 DEX_POKES / 8
 #define FLAGS_NUMBER POK_DIV8 % 8 ? POK_DIV8 + 1 : POK_DIV8

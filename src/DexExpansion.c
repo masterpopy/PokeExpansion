@@ -380,7 +380,7 @@ u16 get_lowest_evo_stage(u16 species)
     for (u16 i = 1; i < ALL_POKES; i++)
     {
         struct evolution_sub* evo = (*evo_table)[i];
-        for (u8 j = 0; j < EVO_PER_POKE; j++)
+        for (u8 j = 0; j < EVOS_PER_MON; j++)
         {
             if (evo[j].poke == species)
             {

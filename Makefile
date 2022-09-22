@@ -48,7 +48,7 @@ CFLAGS = -mthumb -mno-thumb-interwork -mcpu=arm7tdmi -I $(SRC_DIR) -fno-inline -
 ASFLAGS = -mcpu=arm7tdmi -mthumb -I $(SRC_DIR)
 
 $(shell mkdir -p $(BUILDDIR))
- c_dep = $(shell $(SCANINC) $(SRC_DIR)/$*.c)
+c_dep = $(shell $(SCANINC) $(SRC_DIR)/$*.c)
 
 $(BUILDDIR)/%.o : $(SRC_DIR)/%.c $$(c_dep)
 	$(PREPROC) $< charmap.txt | $(GCC) $(CFLAGS) -o $(BUILDDIR)/$*.o -x c -c -

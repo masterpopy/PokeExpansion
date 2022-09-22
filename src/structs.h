@@ -262,7 +262,7 @@ struct evolution_sub{
     u8 pad2;
 };
 
-extern struct evolution_sub (*evo_table)[ALL_POKES][EVO_PER_POKE];
+extern struct evolution_sub (*evo_table)[ALL_POKES][EVOS_PER_MON];
 
 
 #endif /* B_STRUCTS */
