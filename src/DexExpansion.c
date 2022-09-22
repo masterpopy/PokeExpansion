@@ -158,7 +158,6 @@ void dex_move_cursor(enum dex_cursor_side side, u16 cur_pos, u16 unkown)
         case cursor_jump:
         {
             to_get = cur_pos - 5;
-            state = get_poke_state_ptr(to_get);
             for (u16 i = 0; i <= 0xA; i++)
             {
                 u16 another_counter = to_get + i;
