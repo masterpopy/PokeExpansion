@@ -3,7 +3,6 @@
 
 #include "types.h"
 #include "structs.h"
-
 u16 sav_get_checksum(struct sav_buff* ptr, u32 size);
 u8 sub_8152908(u8 unkown, u8* data);
 u8 copy_flash_section(u8 index, void* dst);
@@ -18,7 +17,7 @@ void dex_cursor_print_pokeball(u16 caught, u8 arg2, u8 arg3);
 void dex_cursor_print_no(u16 stateID, u8 arg2, u8 arg3);
 void rbox_to_vram(u8 rboxID, u8 switchID);
 u8 sub_80BE91C(struct pokedex_state* state, u8 objID);
-
+void* memset(void* ptr, int val, unsigned int size);
 u32 __udivsi3(u32 numerator, u32 denumerator);
 u32 __umodsi3(u32 numerator, u32 denumerator);
 

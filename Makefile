@@ -1,7 +1,22 @@
 
+ifeq ($(CC),)
+HOSTCC := gcc
+else
+HOSTCC := $(CC)
+endif
+
+ifeq ($(CXX),)
+HOSTCXX := g++
+else
+HOSTCXX := $(CXX)
+endif
+
+
 SRC_DIR := src
 BUILDDIR := build
 PREPROC = tools/preproc.exe
+#要使用这个功能必须保证你出来的头文件是项目里有的，否则会出错
+SCANINC = tools/scaninc.exe
 
 ELF = $(BUILDDIR)/linked.o
 ROM = $(BUILDDIR)/output.bin
@@ -16,22 +31,35 @@ AS := arm-none-eabi-as
 LD := arm-none-eabi-ld
 OBJCOPY = arm-none-eabi-objcopy
 
+.PHONY : all
+# Clear the default suffixes
+.SUFFIXES:
+# Don't delete intermediate files
+.SECONDARY:
+# Delete files that weren't built properly
+.DELETE_ON_ERROR:
+
+# Secondary expansion is required for dependency variables in object rules.
+.SECONDEXPANSION:
+
 all : $(ROM)
 
 CFLAGS = -mthumb -mno-thumb-interwork -mcpu=arm7tdmi -I $(SRC_DIR) -fno-inline -mlong-calls -march=armv4t -Wall -O2
 ASFLAGS = -mcpu=arm7tdmi -mthumb -I $(SRC_DIR)
-$(shell mkdir -p $(BUILDDIR))
 
-$(BUILDDIR)/%.o : $(SRC_DIR)/%.c
+$(shell mkdir -p $(BUILDDIR))
+ c_dep = $(shell $(SCANINC) $(SRC_DIR)/$*.c)
+
+$(BUILDDIR)/%.o : $(SRC_DIR)/%.c $$(c_dep)
 	$(PREPROC) $< charmap.txt | $(GCC) $(CFLAGS) -o $(BUILDDIR)/$*.o -x c -c -
 
 $(BUILDDIR)/%.o : $(SRC_DIR)/%.s
 	$(PREPROC) $< charmap.txt | $(AS) $(ASFLAGS) -o $(BUILDDIR)/$*.o
 
 $(ELF): $(C_OBJS) $(ASM_OBJS)
-	$(LD) BPEE.ld -T linker.ld -o $@ $(C_OBJS) $(ASM_OBJS)
+	$(LD) BPEE.ld -T linker.ld -o $@ $^
 
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@
 
-$(shell python scripts/insert)
+#$(shell python scripts/insert)

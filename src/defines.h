@@ -12,7 +12,6 @@
 #define FLAGS_NUMBER POK_DIV8 % 8 ? POK_DIV8 + 1 : POK_DIV8
 
 #include "functions.h"
-#include "string.h"
 #include "locations.h"
 #include "./defines/pokes.h"
 
