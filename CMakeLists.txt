@@ -5,6 +5,7 @@ set(CMAKE_C_STANDARD 11)
 
 include_directories(src)
 include_directories(src/defines)
+ADD_DEFINITIONS(-D__INTELLISENSE__)
 
 add_executable(PokeExpansion
         src/defines/pokes.h
@@ -13,6 +14,5 @@ add_executable(PokeExpansion
         src/functions.h
         src/locations.h
         src/Saveblock.c
-        src/SearchTables.c
         src/structs.h
         src/types.h src/species_name.c src/base_stats.c src/dex.c)

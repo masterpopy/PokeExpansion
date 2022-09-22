@@ -50,6 +50,22 @@ ASFLAGS = -mcpu=arm7tdmi -mthumb -I $(SRC_DIR)
 $(shell mkdir -p $(BUILDDIR))
 c_dep = $(shell $(SCANINC) $(SRC_DIR)/$*.c)
 
+
+
+%.s: ;
+%.png: ;
+%.pal: ;
+%.aif: ;
+
+%.1bpp: %.png  ; $(GFX) $< $@
+%.4bpp: %.png  ; $(GFX) $< $@
+%.8bpp: %.png  ; $(GFX) $< $@
+%.gbapal: %.pal ; $(GFX) $< $@
+%.gbapal: %.png ; $(GFX) $< $@
+%.lz: % ; $(GFX) $< $@
+%.rl: % ; $(GFX) $< $@
+
+
 $(BUILDDIR)/%.o : $(SRC_DIR)/%.c $$(c_dep)
 	$(PREPROC) $< charmap.txt | $(GCC) $(CFLAGS) -o $(BUILDDIR)/$*.o -x c -c -
 

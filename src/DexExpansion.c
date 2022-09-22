@@ -1,9 +1,9 @@
 #include "defines.h"
 
 extern struct pokedex_state** get_newpokes_state_ptr();
-extern u16 a_to_z_table[];
-extern u16 lightest_table[];
-extern u16 smallest_table[];
+extern const u16 gPokedexOrder_Alphabetical[];
+extern const u16 gPokedexOrder_Weight[];
+extern const u16 gPokedexOrder_Height[];
 
 u8 get_set_dex_flags(u16 national_no, u8 switchID)
 {
@@ -67,7 +67,7 @@ void clean_pokestates(u16 from, u16 to)
     return;
 }
 
-void set_pokes_in_dex(u16 max_pokes, enum dex_mode mode, u16 table[], u8 reverse)
+void set_pokes_in_dex(u16 max_pokes, enum dex_mode mode,const u16 table[], u8 reverse)
 {
     u16 seen_in_dex = 0;
     struct pokedex_state* state;
@@ -245,19 +245,19 @@ void set_pokes_to_display_in_dex(enum dex_mode mode, enum dex_order order)
             set_pokes_in_dex(max_pokes, mode, 0, 0);
             break;
         case a_to_z:
-            set_pokes_in_dex(DEX_POKES, mode, a_to_z_table, 0);
+            set_pokes_in_dex(DEX_POKES, mode, gPokedexOrder_Alphabetical, 0);
             break;
         case lightest:
-            set_pokes_in_dex(DEX_POKES, mode, lightest_table, 0);
+            set_pokes_in_dex(DEX_POKES, mode, gPokedexOrder_Weight, 0);
             break;
         case heaviest:
-            set_pokes_in_dex(DEX_POKES, mode, lightest_table, 1);
+            set_pokes_in_dex(DEX_POKES, mode, gPokedexOrder_Weight, 1);
             break;
         case smallest:
-            set_pokes_in_dex(DEX_POKES, mode, smallest_table, 0);
+            set_pokes_in_dex(DEX_POKES, mode, gPokedexOrder_Height, 0);
             break;
         case tallest:
-            set_pokes_in_dex(DEX_POKES, mode, smallest_table, 1);
+            set_pokes_in_dex(DEX_POKES, mode, gPokedexOrder_Height, 1);
             break;
     }
 }
