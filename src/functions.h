@@ -3,6 +3,7 @@
 
 #include "types.h"
 #include "structs.h"
+#pragma long_calls
 u16 sav_get_checksum(struct sav_buff* ptr, u32 size);
 u8 sub_8152908(u8 unkown, u8* data);
 u8 copy_flash_section(u8 index, void* dst);
@@ -21,4 +22,5 @@ void* memset(void* ptr, int val, unsigned int size);
 u32 __udivsi3(u32 numerator, u32 denumerator);
 u32 __umodsi3(u32 numerator, u32 denumerator);
 
+#pragma long_calls_off
 #endif /* VANILLA_FUNCTIONS */
