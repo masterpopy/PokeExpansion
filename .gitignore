@@ -45,3 +45,9 @@
 *.lnk
 .idea
 cmake-build-debug
+
+*.4bpp
+*.lz
+*.gbapal
+*.1bpp
+*.8bpp

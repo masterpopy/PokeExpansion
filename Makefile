@@ -17,7 +17,7 @@ BUILDDIR := build
 PREPROC = tools/preproc.exe
 #要使用这个功能必须保证你出来的头文件是项目里有的，否则会出错
 SCANINC = tools/scaninc.exe
-
+GFX = tools/gbagfx.exe
 ELF = $(BUILDDIR)/linked.o
 ROM = $(BUILDDIR)/output.bin
 
