@@ -359,13 +359,6 @@ u16 dex_get_searched_pokes(enum dex_mode mode, enum dex_order order, u8 name, u8
     return *pokes_in;
 }
 
-u16 is_using_two_frame_anim(u16 species)
-{
-    if (species == PKMN_UNOWN || species == PKMN_SPINDA || species == PKMN_DEOXYS || species == PKMN_CASTFORM || species >= PKMN_MAX)
-        return 0;
-    return 1;
-}
-
 struct crytable* get_cry_ptr(u16 ID, u8 cry_2)
 {
     return cry_2 ? &gCryTable_Reverse[ID] : &gCryTable[ID];
