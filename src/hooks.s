@@ -131,3 +131,26 @@ get_pokecry:
 	bl get_cry_ptr
 	ldr r1, =(0x080A3656 | 1)
 	bx r1
+
+    .syntax unified
+    .global memcpy
+    .thumb_func
+    .type memcpy,function
+memcpy:
+	ldr r3, =(memcpy_)
+	bx r3
+	.size memcpy, . - memcpy
+
+    .syntax unified
+    .global memset
+    .thumb_func
+    .type memset,function
+memset:
+	ldr r3, =(memset_)
+	bx r3
+	.size memset, . - memset
+
+    .syntax unified
+    .global malloc
+    .thumb_func
+    .type malloc,function

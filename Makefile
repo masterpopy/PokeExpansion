@@ -44,7 +44,7 @@ OBJCOPY = arm-none-eabi-objcopy
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 
-all : $(ROM)
+all : test.gba
 
 CFLAGS = -mthumb -mno-thumb-interwork -mcpu=arm7tdmi -I $(SRC_DIR) -fno-inline -march=armv4t -Wall -O5
 CPPFLAGS := -Wno-trigraph
@@ -83,4 +83,6 @@ $(ELF): $(C_OBJS) $(ASM_OBJS)
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@
 
-#$(shell python scripts/insert)
+test.gba:rom.gba $(ROM)
+	python scripts/expansion.py
+	python scripts/insert

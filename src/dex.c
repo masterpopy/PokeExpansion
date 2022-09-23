@@ -2738,7 +2738,7 @@ const u8 sMonAnimationDelayTable[NUM_SPECIES - 1] =
 };
 
 
-static const u8 sSpeciesToBackAnimSet[NUM_SPECIES] =
+const u8 sSpeciesToBackAnimSet[NUM_SPECIES] =
 {
     [SPECIES_BULBASAUR]  = BACK_ANIM_DIP_RIGHT_SIDE,
     [SPECIES_IVYSAUR]    = BACK_ANIM_H_SLIDE,

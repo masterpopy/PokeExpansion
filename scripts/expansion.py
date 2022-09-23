@@ -3,6 +3,7 @@
 import os
 import sys
 import shutil
+import subprocess
 
 #if you didn't expand pokemon before, do not touch those values
 expanding_again = False
@@ -27,32 +28,32 @@ rom_name = 'rom.gba'
 new_rom_name = 'test.gba'
 offset_file = 'offsets.ini'
 table_config = (
-	('base_stats', 0x1bc, 28, 'gBaseStats')
-	('poke_front_img', 0x128, 8, 'gMonFrontPicTable')
-	('poke_back_img', 0x12c, 8, 'gMonBackPicTable')
-	('poke_sprite_pal', 0x130, 8, 'gMonPaletteTable')
-	('shiny_sprite_pal', 0x134, 8, 'gMonShinyPaletteTable')
-	('icon_img', 0x138, 4, 'gMonIconTable')
-	('icon_pal', 0x13c, 1, 'gMonIconPaletteIndices')
-	('poke_names', 0x144, 11, 'gSpeciesNames')
-	('tm_hm_comp_table', 0x6e060, 8, 'sTutorLearnsets')
-	('move_tutor_table', 0x1b2390, 4, 'gTMHMLearnsets')
-	('dex_table', 0xbfa20, 32, 'gPokedexEntries')
-	('evo_table', 0x6d140, 40, 'gEvolutionTable')
-	('enymyyTable', 0xa5f54, 4, 'gMonFrontPicCoords')
-	('playeryTable', 0xa5ebc, 4, 'gMonBackPicCoords')
-	('learnset_table', 0x6e3b4, 4, 'gLevelUpLearnsets')
-	('front_animation_table', 0x6ee7c, 1, 'sMonFrontAnimIdsTable')
-	('anim_delay_table', 0x6eddc, 1, 'sMonAnimationDelayTable')
-	('footprint_table', 0xc0dbc, 4, 'gMonFootprintTable')
-	('crytable1', 0xa35ec, 12, '-')
-	('crytable2', 0xa35dc, 12, '-')
-	('altitude_table', 0xa5ff4, 1, 'gEnemyMonElevation')
-	('auxialary_cry_table', 0x6d534, 2, '-')
-	('nationaldex_table', 0x6d4bc, 2, 'sSpeciesToNationalPokedexNum')
-	('hoenn_to_national_table', 0x6d494, 2, 'sHoennToNationalOrder')
-	('hoenn_dex_table', 0x6d3fc, 2, 'sSpeciesToHoennPokedexNum')
-	('back_anim_table', 0x17f488, 1, 'sSpeciesToBackAnimSet')
+	('base_stats', 0x1bc, 28, 'gBaseStats'),
+	('poke_front_img', 0x128, 8, 'gMonFrontPicTable'),
+	('poke_back_img', 0x12c, 8, 'gMonBackPicTable'),
+	('poke_sprite_pal', 0x130, 8, 'gMonPaletteTable'),
+	('shiny_sprite_pal', 0x134, 8, 'gMonShinyPaletteTable'),
+	('icon_img', 0x138, 4, 'gMonIconTable'),
+	('icon_pal', 0x13c, 1, 'gMonIconPaletteIndices'),
+	('poke_names', 0x144, 11, 'gSpeciesNames'),
+	('tm_hm_comp_table', 0x6e060, 8, 'sTutorLearnsets'),
+	('move_tutor_table', 0x1b2390, 4, 'gTMHMLearnsets'),
+	('dex_table', 0xbfa20, 32, 'gPokedexEntries'),
+	('evo_table', 0x6d140, 40, 'gEvolutionTable'),
+	('enymyyTable', 0xa5f54, 4, 'gMonFrontPicCoords'),
+	('playeryTable', 0xa5ebc, 4, 'gMonBackPicCoords'),
+	('learnset_table', 0x6e3b4, 4, 'gLevelUpLearnsets'),
+	('front_animation_table', 0x6ee7c, 1, 'sMonFrontAnimIdsTable'),
+	('anim_delay_table', 0x6eddc, 1, 'sMonAnimationDelayTable'),
+	('footprint_table', 0xc0dbc, 4, 'gMonFootprintTable'),
+	('crytable1', 0xa35ec, 12, '-'),
+	('crytable2', 0xa35dc, 12, '-'),
+	('altitude_table', 0xa5ff4, 1, 'gEnemyMonElevation'),
+	('auxialary_cry_table', 0x6d534, 2, '-'),
+	('nationaldex_table', 0x6d4bc, 2, 'sSpeciesToNationalPokedexNum'),
+	('hoenn_to_national_table', 0x6d494, 2, 'sHoennToNationalOrder'),
+	('hoenn_dex_table', 0x6d3fc, 2, 'sSpeciesToHoennPokedexNum'),
+	('back_anim_table', 0x17f488, 1, 'sSpeciesToBackAnimSet'),
 	('frame_control_table', 0x5e7bc, 4, 'gMonFrontAnimsPtrTable')
 )
 table_names = ["base_stats", "poke_front_img", "poke_back_img", "poke_sprite_pal", "shiny_sprite_pal", "icon_img", "icon_pal", "poke_names", "tm_hm_comp_table", "move_tutor_table", "dex_table", "evo_table", "enymyyTable", "playeryTable", "learnset_table", "front_animation_table", "anim_delay_table", "footprint_table", "crytable1", "crytable2", "altitude_table", "auxialary_cry_table", "nationaldex_table", "hoenn_to_national_table", "hoenn_dex_table", "back_anim_table", "frame_control_table"]
@@ -64,6 +65,46 @@ no_of_names = len(table_names)
 no_of_tables = len(table_ptrs)
 no_of_sizeofs = len(sizeofs)
 no_of_to_repoints = len(to_repoint)
+
+PREFIX = 'arm-none-eabi-'
+OBJDUMP = PREFIX + 'objdump'
+NM = PREFIX + 'nm'
+
+def get_text_section():
+		# Dump sections
+		out = subprocess.check_output([OBJDUMP, '-t', 'build/linked.o'])
+		lines = out.decode().split('\n')
+
+		# Find text section
+		text = filter(lambda x: x.strip().endswith('.text'), lines)
+		section = (list(text))[0]
+
+		# Get the offset
+		offset = int(section.split(' ')[0], 16)
+
+		return offset
+
+def symbols(subtract=0):
+		out = subprocess.check_output([NM, 'build/linked.o'])
+		lines = out.decode().split('\n')
+
+		name = ''
+
+		ret = {}
+		for line in lines:
+				parts = line.strip().split()
+
+				if (len(parts) < 3):
+						continue
+
+				if (parts[1].lower() not in {'t','d'}):
+						continue
+
+				offset = int(parts[0], 16)
+				ret[parts[2]] = offset - subtract
+
+		return ret
+
 
 def align_offset(offset):
 	while (offset % 4) != 0:
@@ -204,68 +245,13 @@ def repoint_table(rom, offset, tableID):
 		sizeof = sizeofs[tableID]
 		old_slots = get_no_of_old_slots(tableID)
 		needed_old = old_slots * sizeof
-		needed_new = (new_pokes - old_slots) * sizeof
 		#get empty slot to copy
 		rom.seek(table_ptr + sizeof)
-		empty_slot = rom.read(sizeof)
-		# copy old data
-		rom.seek(table_ptr)
-		to_copy = rom.read(needed_old)
 		#align 4
-		offset = align_offset(offset)
-		rom.seek(offset)
-		rom.write(to_copy)
 		clear_space(rom, table_ptr, needed_old)
-		update_ptrs(rom, offset + 0x08000000, tableID)
+		if offset != 0:
+			update_ptrs(rom, offset, tableID)
 		save_table_ptrs(name, offset, tableID)
-		offset += needed_old
-		rom.seek(offset)
-		#append unowns
-		if old_slots < 440 and name != "dex_table":
-			for i in range(old_slots, 440):
-				if (name == "poke_names"):
-					if i == old_slots:
-						eggname = [0xBF, 0xC1, 0xC1, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
-						for i2 in range (0, sizeof):
-							rom.write(eggname[i2].to_bytes(1, byteorder = 'little'))
-					else:
-						pokename = [0xCF, 0xC8, 0xC9, 0xD1, 0xC8, 0x00]
-						for i2 in range(0, len(pokename)):
-							rom.write(pokename[i2].to_bytes(1, byteorder = 'little'))
-						num = 0xBB +  (i - old_slots)
-						if num == 0xD5:
-							num = 0xAB
-						elif num == 0xD6:
-							num = 0xAC
-						rom.write((num).to_bytes(1, byteorder = 'little'))
-						rom.write((0xFF000000).to_bytes(4, byteorder = 'big'))
-				elif name == "nationaldex_table":
-					if i == 439:
-						rom.write((387).to_bytes(sizeof, byteorder = 'little'))
-					else:
-						rom.write((0x0).to_bytes(sizeof, byteorder = 'little'))
-				else:
-					rom.write(empty_slot)
-				offset += sizeof
-		# write new data for empty slots
-		
-		to_loop = new_pokes - 440
-		if (name == "dex_table"):
-			to_loop = dex_pokes - (old_slots - 1)
-		if name == "poke_names":
-			genIV_V_VI_names = open("scripts//new_names.bin", 'rb')
-		for i in range(0, to_loop):
-			if name == "hoenn_dex_table" or name == "hoenn_to_national_table":
-				rom.write((440 + i).to_bytes(sizeof, byteorder = 'little'))
-			elif name == "nationaldex_table":
-				rom.write((388 + i).to_bytes(sizeof, byteorder = 'little'))
-			elif name == "poke_names" and new_names == True:
-				rom.write(genIV_V_VI_names.read(11))
-			else:
-				rom.write(empty_slot)
-			offset += sizeof
-		if name == "poke_names":
-			genIV_V_VI_names.close()
 		
 	return offset
 
@@ -316,35 +302,19 @@ def build_and_insert_code(offset):
 		
 shutil.copyfile(rom_name, new_rom_name)
 with open(new_rom_name, 'rb+') as rom:
-	if (no_of_sizeofs != no_of_tables or no_of_sizeofs != no_of_to_repoints or no_of_names != no_of_sizeofs):
-		print("Tables don't match.")
-		print(no_of_names, " ", no_of_sizeofs, " ", no_of_tables, " ", no_of_to_repoints)
-		sys.exit(1)
-	if (new_pokes <= 440):
-		print("Amount of new pokemon must be higher than the current one.")
-		sys.exit(1)
-	if expanding_again == True and old_pokes <= 440:
-		print("When expanding again amount of old pokemon must be higher than 440")
-		sys.exit(1)
-	print("Finding free space...")
-	needed_bytes = 0x0
+	rom.seek(0,2)
+	if (rom.tell() < 0x2000000):
+		rom.write(b'\xFF' * (0x2000000 - rom.tell()))
+		rom.flush()
+	rom.seek(0)
+	table = symbols()
 	for i in range(0, no_of_tables):
 		if (to_repoint[i] == True):
-			needed_bytes += (new_pokes * sizeofs[i])
-			needed_bytes = align_offset(needed_bytes)
-	offset = find_offset_to_put(rom, needed_bytes, free_space)
-	if (offset == 0):
-		print("Not enough free space.")
-		sys.exit(1)
-	for i in range(0, no_of_tables):
-		if (to_repoint[i] == True):
+			if table_config[i][3] != '-':
+				offset = table[table_config[i][3]]
+			else:
+				offset = 0
 			print("Repointing " + table_names[i] + " to offset " + hex(offset))
 			offset = repoint_table(rom, offset, i)
 	dex_related_bytechanges(rom)
-	if build_code == True and expanding_again == False:
-		offset = find_offset_to_put(rom, 0x2500, offset)
-		if offset != 0:
-			build_and_insert_code(offset)
-		else:
-			print ("Not enough free space to insert code")
 	rom.close()
