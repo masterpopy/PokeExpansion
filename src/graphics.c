@@ -24,6 +24,7 @@ struct MonCoords
     // uses it as a u8 and casting won't match.
     u8 size; // u8 width:4, height:4;
     u8 y_offset;
+	u16 unused;
 };
 
 #define MON_COORDS_SIZE(width, height)(DIV_ROUND_UP(width, 8) << 4 | DIV_ROUND_UP(height, 8))
