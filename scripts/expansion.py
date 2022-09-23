@@ -220,16 +220,10 @@ def save_table_ptrs(name, offset, not_clear):
 	if not_clear == 0:
 		ini.seek(0x0)
 		ini.truncate()
-		ini.write("AllPokes: ")
-		ini.write(str(new_pokes) + "\n")
-		ini.write("NationalDexPokes: ")
-		ini.write(str(dex_pokes) + "\n")
-		ini.write("RegionalDexPokes: ")
-		ini.write(str(hoenn_dex_pokes) + "\n")
 	ini.write(name)
-	ini.write(": ")
+	ini.write(" = ")
 	ini.write(hex(offset))
-	ini.write("\n")
+	ini.write(";\n")
 	ini.close()
 
 def clear_space(rom, loc, bytes):
@@ -240,7 +234,7 @@ def clear_space(rom, loc, bytes):
 	
 def repoint_table(rom, offset, tableID):
 	table_ptr = get_oldtable_address(rom, tableID)
-	name = table_names[tableID]
+	name = table_config[tableID][3]
 	if table_ptr:
 		sizeof = sizeofs[tableID]
 		old_slots = get_no_of_old_slots(tableID)
@@ -251,7 +245,8 @@ def repoint_table(rom, offset, tableID):
 		clear_space(rom, table_ptr, needed_old)
 		if offset != 0:
 			update_ptrs(rom, offset, tableID)
-		save_table_ptrs(name, offset, tableID)
+		if name != '-':
+			save_table_ptrs(name, offset, tableID)
 		
 	return offset
 
@@ -281,6 +276,11 @@ def replace_word(file, to_search, replacement):
 	copy = copy.replace(to_replace, to_search + " " + replacement)
 	file.seek(0x0)
 	file.write(copy)
+
+def clear_from_to(rom, from_, to_):
+	rom.seek(from_)
+	for i in range(0, to_ - from_):
+		rom.write(b'\xFF')
 		
 def build_and_insert_code(offset):
 	linker = open("linker.ld", 'r+')
@@ -317,4 +317,9 @@ with open(new_rom_name, 'rb+') as rom:
 			print(table_names[i] + " = " + hex(offset) + ";")
 			offset = repoint_table(rom, offset, i)
 	dex_related_bytechanges(rom)
+	clear_from_to(rom, 0x31C898, 0x31D93C)
+	clear_from_to(rom, 0x3230DC, 0x32531C) #clear actual old learnsets
+	clear_from_to(rom, 0x32937C, 0x3299EC) #clear pointers to moves
+	clear_from_to(rom, 0x31ACE8, 0x31AE38)
+	clear_from_to(rom, 0x61C524, 0x61CAAC)
 	rom.close()

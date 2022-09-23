@@ -83,6 +83,3 @@ $(ELF): $(C_OBJS) $(ASM_OBJS)
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@
 
-test.gba:rom.gba $(ROM)
-	python scripts/expansion.py
-	python scripts/insert

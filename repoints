@@ -10,3 +10,14 @@ gAbilityNames 081C3028
 ### ability descriptions repoint
 gAbilityDescriptionPointers 080001C4
 gAbilityDescriptionPointers 081C3078
+###learnset_table
+gLevelUpLearnsets 0806E3B4
+gLevelUpLearnsets 080693A0
+gLevelUpLearnsets 08069414
+gLevelUpLearnsets 0806E1F8
+gLevelUpLearnsets 0806E250
+gLevelUpLearnsets 081A00AC
+gLevelUpLearnsets 081A0278
+### learnsets for PGEscript.py
+gLevelUpLearnsets 0806930C
+###learnset_table
