@@ -39,10 +39,7 @@ struct BaseStats
  /* 0x06 */ u8 type1;
  /* 0x07 */ u8 type2;
  /* 0x08 */ u8 catchRate;
-  		    u8 bodyColor : 6;
-            u8 noFlip : 1;
-            u8 flags : 1;
- /* 0x09 */ u16 expYield;
+ /* 0x09 */ u8 expYield;
  /* 0x0A */ u16 evYield_HP:2;
  /* 0x0A */ u16 evYield_Attack:2;
  /* 0x0A */ u16 evYield_Defense:2;
@@ -57,6 +54,9 @@ struct BaseStats
  /* 0x13 */ u8 growthRate;
  /* 0x14 */ u8 eggGroup1;
  /* 0x15 */ u8 eggGroup2;
+ /* 0x18 */ u8 flags;
+ /* 0x19 */ u8 bodyColor : 7;
+            u8 noFlip : 1;
  /* 0x16 */ struct {
 	 			 u32 a1:10;
 				 u32 a2:10;

@@ -6,7 +6,7 @@ set(CMAKE_C_STANDARD 11)
 include_directories(src)
 include_directories(src/defines)
 ADD_DEFINITIONS(-D__INTELLISENSE__)
-
+add_subdirectory(POKEMON-EMERALD-G9-PROJECT)
 add_executable(PokeExpansion
         src/defines/pokes.h
         src/defines.h

@@ -314,7 +314,7 @@ with open(new_rom_name, 'rb+') as rom:
 				offset = table[table_config[i][3]]
 			else:
 				offset = 0
-			print("Repointing " + table_names[i] + " to offset " + hex(offset))
+			print(table_names[i] + " = " + hex(offset) + ";")
 			offset = repoint_table(rom, offset, i)
 	dex_related_bytechanges(rom)
 	rom.close()

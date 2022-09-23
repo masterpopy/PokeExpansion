@@ -1,1 +1,12 @@
 #empty for now
+##egg_moves
+gEggMoves 080703F0
+gEggMoves 08070468
+### ability names repoint
+gAbilityNames 080001C0
+gAbilityNames 0814F0D4
+gAbilityNames 0814F854
+gAbilityNames 081C3028
+### ability descriptions repoint
+gAbilityDescriptionPointers 080001C4
+gAbilityDescriptionPointers 081C3078

@@ -68,3 +68,4 @@ union AnimCmd
 #include "data/tmhm_learnsets.h"
 #include "data/front_pic_anims.h"
 #include "data/evolution.h"
+#include "data/abilities.h"
