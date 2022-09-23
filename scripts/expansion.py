@@ -12,9 +12,9 @@ evos_per_entry = 5
 ##################################################################
 #those values should be configured according to user
 build_code = True #set to False if you want this script to only replace tables and to not run build/insert scripts
-free_space = 0xF60000 #location to start looking for free space
-new_pokes = X + 441 #X is the number of pokemon you're adding, ignore that 441, it's for all limbo slots; say you want to include gen 4, 5 and 6 that gives 335
-dex_pokes = 721 #amount of pokes you want to have in national dex; max you can currently go is 999
+free_space = 0x1b00000 #location to start looking for free space
+new_pokes = 1207 #X is the number of pokemon you're adding, ignore that 441, it's for all limbo slots; say you want to include gen 4, 5 and 6 that gives 335
+dex_pokes = 999 #amount of pokes you want to have in national dex; max you can currently go is 999
 hoenn_dex_pokes = 202 #amount of pokes in the regional hoenn dex
 new_names = True        #if True sets new pokemon to gen4, gen5, gen6 names, otherwise all pokemon are named Bulbasaur
 clear_repointed_data = True #if True clears old tables, if False doesn't touch them
@@ -26,35 +26,35 @@ MoveTutorComp_repoint = True #same as above but movetutor table
 rom_name = 'rom.gba'
 new_rom_name = 'test.gba'
 offset_file = 'offsets.ini'
-'''
-base_stats=0x1bc gBaseStats
-poke_front_img=0x128 gMonFrontPicTable
-poke_back_img=0x12c gMonBackPicTable
-poke_sprite_pal=0x130 gMonPaletteTable
-shiny_sprite_pal=0x134 gMonShinyPaletteTable
-icon_img=0x138 gMonIconTable
-icon_pal=0x13c gMonIconPaletteIndices
-poke_names=0x144   gSpeciesNames
-tm_hm_comp_table=0x6e060 sTutorLearnsets       
-move_tutor_table=0x1b2390 gTMHMLearnsets      
-dex_table=0xbfa20 gPokedexEntries
-evo_table=0x6d140 gEvolutionTable
-enymyyTable=0xa5f54 gMonFrontPicCoords
-playeryTable=0xa5ebc gMonBackPicCoords
-learnset_table=0x6e3b4 gLevelUpLearnsets
-front_animation_table=0x6ee7c   sMonFrontAnimIdsTable
-anim_delay_table=0x6eddc     sMonAnimationDelayTable   
-footprint_table=0xc0dbc    gMonFootprintTable     
-crytable1=0xa35ec -
-crytable2=0xa35dc -
-altitude_table=0xa5ff4 gEnemyMonElevation
-auxialary_cry_table=0x6d534 -   
-nationaldex_table=0x6d4bc   sSpeciesToNationalPokedexNum   
-hoenn_to_national_table=0x6d494 sHoennToNationalOrder
-hoenn_dex_table=0x6d3fc   sSpeciesToHoennPokedexNum     
-back_anim_table=0x17f488 sSpeciesToBackAnimSet
-frame_control_table=0x5e7bc gMonFrontAnimsPtrTable
-'''
+table_config = (
+	('base_stats', 0x1bc, 28, 'gBaseStats')
+	('poke_front_img', 0x128, 8, 'gMonFrontPicTable')
+	('poke_back_img', 0x12c, 8, 'gMonBackPicTable')
+	('poke_sprite_pal', 0x130, 8, 'gMonPaletteTable')
+	('shiny_sprite_pal', 0x134, 8, 'gMonShinyPaletteTable')
+	('icon_img', 0x138, 4, 'gMonIconTable')
+	('icon_pal', 0x13c, 1, 'gMonIconPaletteIndices')
+	('poke_names', 0x144, 11, 'gSpeciesNames')
+	('tm_hm_comp_table', 0x6e060, 8, 'sTutorLearnsets')
+	('move_tutor_table', 0x1b2390, 4, 'gTMHMLearnsets')
+	('dex_table', 0xbfa20, 32, 'gPokedexEntries')
+	('evo_table', 0x6d140, 40, 'gEvolutionTable')
+	('enymyyTable', 0xa5f54, 4, 'gMonFrontPicCoords')
+	('playeryTable', 0xa5ebc, 4, 'gMonBackPicCoords')
+	('learnset_table', 0x6e3b4, 4, 'gLevelUpLearnsets')
+	('front_animation_table', 0x6ee7c, 1, 'sMonFrontAnimIdsTable')
+	('anim_delay_table', 0x6eddc, 1, 'sMonAnimationDelayTable')
+	('footprint_table', 0xc0dbc, 4, 'gMonFootprintTable')
+	('crytable1', 0xa35ec, 12, '-')
+	('crytable2', 0xa35dc, 12, '-')
+	('altitude_table', 0xa5ff4, 1, 'gEnemyMonElevation')
+	('auxialary_cry_table', 0x6d534, 2, '-')
+	('nationaldex_table', 0x6d4bc, 2, 'sSpeciesToNationalPokedexNum')
+	('hoenn_to_national_table', 0x6d494, 2, 'sHoennToNationalOrder')
+	('hoenn_dex_table', 0x6d3fc, 2, 'sSpeciesToHoennPokedexNum')
+	('back_anim_table', 0x17f488, 1, 'sSpeciesToBackAnimSet')
+	('frame_control_table', 0x5e7bc, 4, 'gMonFrontAnimsPtrTable')
+)
 table_names = ["base_stats", "poke_front_img", "poke_back_img", "poke_sprite_pal", "shiny_sprite_pal", "icon_img", "icon_pal", "poke_names", "tm_hm_comp_table", "move_tutor_table", "dex_table", "evo_table", "enymyyTable", "playeryTable", "learnset_table", "front_animation_table", "anim_delay_table", "footprint_table", "crytable1", "crytable2", "altitude_table", "auxialary_cry_table", "nationaldex_table", "hoenn_to_national_table", "hoenn_dex_table", "back_anim_table", "frame_control_table"]
 table_ptrs = [0x0001BC, 0x000128, 0x00012C, 0x000130, 0x000134, 0x000138, 0x00013C, 0x000144, 0x06E060, 0x1B2390, 0x0BFA20, 0x06D140, 0x0A5F54, 0x0A5EBC, 0x06E3B4, 0x06EE7C, 0x06EDDC, 0x0C0DBC, 0x0A35EC, 0x0A35DC, 0x0A5FF4, 0x06D534, 0x06D4BC, 0x06D494, 0x06D3FC, 0x17F488, 0x05E7BC]
 sizeofs = [0x1C, 8, 8, 8, 8, 4, 1, 11, 8, 4, 0x20, evos_per_entry * 8, 4, 4, 4, 1, 1, 4, 0xC, 0xC, 1, 2, 2, 2, 2, 1, 4]

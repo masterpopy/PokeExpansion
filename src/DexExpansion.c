@@ -4,7 +4,7 @@ extern struct pokedex_state** get_newpokes_state_ptr();
 extern const u16 gPokedexOrder_Alphabetical[];
 extern const u16 gPokedexOrder_Weight[];
 extern const u16 gPokedexOrder_Height[];
-
+ALIGNED(2) struct BaseStats agbcc;
 u8 get_set_dex_flags(u16 national_no, u8 switchID)
 {
     /*  0 = get if seen
