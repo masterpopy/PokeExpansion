@@ -44,7 +44,7 @@ OBJCOPY = arm-none-eabi-objcopy
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 
-all : test.gba
+all : $(ROM)
 
 CFLAGS = -mthumb -mno-thumb-interwork -mcpu=arm7tdmi -I $(SRC_DIR) -fno-inline -march=armv4t -Wall -O5
 CPPFLAGS := -Wno-trigraph
