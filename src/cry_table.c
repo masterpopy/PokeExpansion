@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "defines/species.h"
+#include "include/species.h"
 #define cry(sample) {0x20, 60, 0, 0,sample,0xff,0xff}
 #define cry_reverse(sample) {0x30, 60, 0, 0,sample,0xff,0xff}
 

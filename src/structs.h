@@ -25,6 +25,25 @@ struct crytable{
     u16 field_A;
 };
 
+struct item_data{
+    u16 itemID;
+    u16 quantity;
+};
+#define BALL_POCKET_MAX_OLD 16
+#define ITEM_POCKET_MAX_OLD 30
+#define KEY_POCKET_MAX_OLD 30
+#define TM_POCKET_MAX_OLD 64
+#define BERRY_POCKET_MAX_OLD 46
+struct saveblock1{
+    u8 data[0x498];
+    struct item_data PC_items[50];
+    struct item_data items_pocket[ITEM_POCKET_MAX_OLD];
+    struct item_data key_items_pocket[KEY_POCKET_MAX_OLD];
+    struct item_data balls_pocket[BALL_POCKET_MAX_OLD];
+    struct item_data tms_pocket[TM_POCKET_MAX_OLD];
+    struct item_data berries_pocket[BERRY_POCKET_MAX_OLD];
+};
+
 extern const struct crytable gCryTable[];
 extern const struct crytable gCryTable_Reverse[];
 #define ALIGNED(n) __attribute__((aligned(n)))

@@ -1,7 +1,7 @@
 #include "defines.h"
-#include "defines/pokedex.h"
-#include "defines/species.h"
-#include "defines/pokemon_animation.h"
+#include "include/pokedex.h"
+#include "include/species.h"
+#include "include/pokemon_animation.h"
 struct PokedexEntry
 {
     /*0x00*/ u8 categoryName[12];

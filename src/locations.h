@@ -5,7 +5,9 @@
 #include "structs.h"
 
 u8 active_bank;
-u32* sav1_ptr;
+
+extern struct saveblock1* sav1_ptr;
+
 u32* sav2_ptr;
 u32* sav3_ptr;
 u32 sav_index;

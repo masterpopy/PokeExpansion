@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "defines/species.h"
+#include "include/species.h"
 
 const u8 gSpeciesNames[][11] = {
     [SPECIES_NONE] = _("??????????"),

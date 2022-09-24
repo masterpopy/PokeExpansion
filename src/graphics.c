@@ -1,5 +1,5 @@
 #include "defines.h"
-#include "defines/species.h"
+#include "include/species.h"
 
 #define SPECIES_SPRITE(species, sprite) [SPECIES_##species] = {sprite, MON_PIC_SIZE, SPECIES_##species}
 #define SPECIES_PAL(species, pal) [SPECIES_##species] = {pal, SPECIES_##species}

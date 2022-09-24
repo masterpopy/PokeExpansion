@@ -8,12 +8,17 @@
 #define HOENN_DEX_POKES 202
 #define EVOS_PER_MON 10
 
+#define BALL_POCKET_MAX_NEW 16
+#define ITEM_POCKET_MAX_NEW 30
+#define KEY_POCKET_MAX_NEW 30
+#define TM_POCKET_MAX_NEW 108
+#define BERRY_POCKET_MAX_NEW 46
+
 #define POK_DIV8 DEX_POKES / 8
 #define FLAGS_NUMBER POK_DIV8 % 8 ? POK_DIV8 + 1 : POK_DIV8
 
 #include "functions.h"
 #include "locations.h"
-#include "./defines/pokes.h"
 
 /// IDE support
 #if defined(__APPLE__) || defined(__CYGWIN__) || defined(__INTELLISENSE__)
