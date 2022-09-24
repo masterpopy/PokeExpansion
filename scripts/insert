@@ -137,6 +137,52 @@ def bytereplace(rom, offset, data):
 				rom.write(bytes(intbyte.to_bytes(1, 'big')))
 				ar += 1
 
+def expand_ball(rom, table):
+
+	to_repoint_tiles = 	[0x0001D0, 0x076510, 0x0767C0, 0x076AD4, 0x076B0C]
+	repoint_list(rom, table["ball_tiles"], to_repoint_tiles, len(to_repoint_tiles))
+
+	to_repoint_pals = 	[0x0001D4, 0x076514, 0x0767C4, 0x076ADC, 0x076B10]
+	repoint_list(rom, table["ball_pals"], to_repoint_pals, len(to_repoint_pals))
+
+	to_repoint_templates = [0x075538, 0x076518, 0x0767C8, 0x170ED0, 0x171010, 0x1C4A74]
+	repoint_list(rom, table["ball_templates"], to_repoint_templates, len(to_repoint_templates))
+
+	stars_tiles = [0x171D8C, 0x1729D4]
+	repoint_list(rom, table["ball_stars_tiles"], stars_tiles, len(stars_tiles))
+
+	stars_pals  = [0x171D94, 0x1729D8]
+	repoint_list(rom, table["ball_stars_pals"], stars_pals, len(stars_pals))
+
+	stars_IDs = [0x171AA8, 0x171F38, 0x1720B4, 0x1721B8, 0x1722B4, 0x1723C0, 0x1724EC, 0x172644, 0x17277C, 0x1728C8]
+	repoint_list(rom, table["Ball_Stars"], stars_IDs, len(stars_IDs))
+
+	ball_tasks_IDs = [0x171E18, 0x172990]
+	repoint_list(rom, table["ball_anim_tasks"], ball_tasks_IDs, len(ball_tasks_IDs))
+
+	stars_templates = [0x171F30, 0x1720B0, 0x1721B4, 0x1722B8, 0x1723BC, 0x1724F0, 0x172648, 0x172774, 0x1728CC]
+	repoint_list(rom, table["ball_stars_templates"], stars_templates, len(stars_templates))
+
+	ball_fade = [0x172A54, 0x172AA0, 0x172B04, 0x172BE0]
+	repoint_list(rom, table["ball_fadepoke_table"], ball_fade, len(ball_fade))
+
+	repoint(rom, table["getattributes_origingame"], 0x06A79C)
+	repoint(rom, table["setattributes_origingame"], 0x06AEC8)
+	repoint(rom, table["getattributes_lvl"], 0x06A798)
+	repoint(rom, table["setattributes_lvl"], 0x06AEC4)
+	repoint(rom, table["getattributes_ball"], 0x06A7A0)
+	repoint(rom, table["setattributes_ball"], 0x06AECC)
+
+	#Don't call item_to_ball function as argument is already ballID
+	to_bytereplace = [0x0754CE, 0x07567C, 0x075D3A, 0x170C14, 0x1C4A14]
+	for i in range(0, len(to_bytereplace)):
+		bytereplace(rom, to_bytereplace[i], 0, 4)
+	#correct luxury ball ID in happiness boost
+	bytereplace(rom, 0x06DA64, 0xA, 1)
+	#limiter
+	bytereplace(rom, 0x1711A4, 31, 1)
+	bytereplace(rom, 0x171B08, 31, 1)
+
 with open("test.gba", 'rb+') as rom:
 		print("Inserting data")
 		offset = get_text_section()

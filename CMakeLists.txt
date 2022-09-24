@@ -15,4 +15,5 @@ add_executable(PokeExpansion
         src/locations.h
         src/Saveblock.c
         src/structs.h
-        src/types.h src/species_name.c src/base_stats.c src/dex.c src/graphics.c src/cry_table.c src/items_expansion.c)
+        src/types.h src/species_name.c src/base_stats.c src/dex.c src/graphics.c src/cry_table.c src/items_expansion.c
+        src/BallsExpansion.c)

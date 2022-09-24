@@ -1290,3 +1290,4 @@ bag_print_msg = 0x081ABB4C|1;
 TM_boot_sound_and_print = 0x080FDF90|1;
 bag_remove_item = 0x080D6AA4|1;
 Malloc = 0x08000B38|1;
+nullsub_1485 = 0x08007428|1;
