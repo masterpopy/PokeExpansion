@@ -14,7 +14,7 @@ evos_per_entry = 5
 #those values should be configured according to user
 build_code = True #set to False if you want this script to only replace tables and to not run build/insert scripts
 free_space = 0x1b00000 #location to start looking for free space
-new_pokes = 1207 #X is the number of pokemon you're adding, ignore that 441, it's for all limbo slots; say you want to include gen 4, 5 and 6 that gives 335
+new_pokes = 1234 #X is the number of pokemon you're adding, ignore that 441, it's for all limbo slots; say you want to include gen 4, 5 and 6 that gives 335
 dex_pokes = 999 #amount of pokes you want to have in national dex; max you can currently go is 999
 hoenn_dex_pokes = 202 #amount of pokes in the regional hoenn dex
 new_names = True        #if True sets new pokemon to gen4, gen5, gen6 names, otherwise all pokemon are named Bulbasaur

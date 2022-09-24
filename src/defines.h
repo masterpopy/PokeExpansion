@@ -3,7 +3,7 @@
 
 #include "types.h"
 
-#define ALL_POKES 1207
+#define ALL_POKES 1234
 #define DEX_POKES 999
 #define HOENN_DEX_POKES 202
 #define EVOS_PER_MON 10
