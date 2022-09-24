@@ -269,7 +269,7 @@ with open("test.gba", 'rb+') as rom:
 						offset = int(line[:8],16) - 0x08000000
 						bytereplace(rom, offset, line[9:])
 
-
+		expand_ball(rom, table)
 		width = max(map(len, table.keys())) + 1
 		offset_file = open("function_offsets.ini", 'w')
 		for key in sorted(table.keys()):

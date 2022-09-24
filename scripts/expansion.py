@@ -54,7 +54,9 @@ table_config = (
 	('hoenn_to_national_table', 0x6d494, 2, 'sHoennToNationalOrder'),
 	('hoenn_dex_table', 0x6d3fc, 2, 'sSpeciesToHoennPokedexNum'),
 	('back_anim_table', 0x17f488, 1, 'sSpeciesToBackAnimSet'),
-	('frame_control_table', 0x5e7bc, 4, 'gMonFrontAnimsPtrTable')
+	('frame_control_table', 0x5e7bc, 4, 'gMonFrontAnimsPtrTable'),
+	('gItems', 0x0001C8, 0x2C, 'gItems'),
+	('gItemIconTable', 0x1B0034, 8, 'gItemIconTable'),
 )
 table_names = ["base_stats", "poke_front_img", "poke_back_img", "poke_sprite_pal", "shiny_sprite_pal", "icon_img", "icon_pal", "poke_names", "tm_hm_comp_table", "move_tutor_table", "dex_table", "evo_table", "enymyyTable", "playeryTable", "learnset_table", "front_animation_table", "anim_delay_table", "footprint_table", "crytable1", "crytable2", "altitude_table", "auxialary_cry_table", "nationaldex_table", "hoenn_to_national_table", "hoenn_dex_table", "back_anim_table", "frame_control_table"]
 table_ptrs = [0x0001BC, 0x000128, 0x00012C, 0x000130, 0x000134, 0x000138, 0x00013C, 0x000144, 0x06E060, 0x1B2390, 0x0BFA20, 0x06D140, 0x0A5F54, 0x0A5EBC, 0x06E3B4, 0x06EE7C, 0x06EDDC, 0x0C0DBC, 0x0A35EC, 0x0A35DC, 0x0A5FF4, 0x06D534, 0x06D4BC, 0x06D494, 0x06D3FC, 0x17F488, 0x05E7BC]
@@ -213,6 +215,10 @@ def get_no_of_old_slots(tableID):
 			return 388
 		elif name == "auxialary_cry_table":
 			return 136
+		elif name == 'gItems':
+			return 377
+		elif name == 'gItemIconTable':
+			return 388
 	return old_pokes
 	
 def save_table_ptrs(name, offset, not_clear):

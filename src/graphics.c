@@ -1,6 +1,6 @@
 #include "defines.h"
 #include "include/species.h"
-
+#include "include/items.h"
 #define SPECIES_SPRITE(species, sprite) [SPECIES_##species] = {sprite, MON_PIC_SIZE, SPECIES_##species}
 #define SPECIES_PAL(species, pal) [SPECIES_##species] = {pal, SPECIES_##species}
 #define SPECIES_SHINY_PAL(species, pal) [SPECIES_##species] = {pal, SPECIES_##species + SPECIES_SHINY_TAG}
@@ -45,6 +45,9 @@ struct MonCoords
 #include "data/pokemon_graphics/front_pic_table.h"
 #include "data/pokemon_graphics/shiny_palette_table.h"
 #include "data/pokemon_graphics/palette_table.h"
+
+#include "data/graphics/items.h"
+#include "data/item_icon_table.h"
 
 const u8 *const gMonIconTable[] =
 {
