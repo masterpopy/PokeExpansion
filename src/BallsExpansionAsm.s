@@ -3,6 +3,7 @@
 .thumb
 .thumb_func
 
+.global FT1_use_new_balls
 FT1_use_new_balls: @hook at 0x0803E952, via r0, r3 is itemID Fighting tracker function
 	push {r3}
 	mov r0, r3

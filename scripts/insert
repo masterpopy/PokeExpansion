@@ -136,7 +136,12 @@ def bytereplace(rom, offset, data):
 				intbyte=int(words[i],16)
 				rom.write(bytes(intbyte.to_bytes(1, 'big')))
 				ar += 1
-
+def bytereplace_count(rom, offset, value, bytecount):
+	rom.seek(offset)
+	rom.write(value.to_bytes(bytecount, byteorder = 'little'))
+def repoint_list(rom, space, list, len):
+	for i in range (0, len):
+		repoint(rom, space, list[i])
 def expand_ball(rom, table):
 
 	to_repoint_tiles = 	[0x0001D0, 0x076510, 0x0767C0, 0x076AD4, 0x076B0C]
@@ -176,12 +181,16 @@ def expand_ball(rom, table):
 	#Don't call item_to_ball function as argument is already ballID
 	to_bytereplace = [0x0754CE, 0x07567C, 0x075D3A, 0x170C14, 0x1C4A14]
 	for i in range(0, len(to_bytereplace)):
-		bytereplace(rom, to_bytereplace[i], 0, 4)
+		bytereplace_count(rom, to_bytereplace[i], 0, 4)
 	#correct luxury ball ID in happiness boost
-	bytereplace(rom, 0x06DA64, 0xA, 1)
+	bytereplace_count(rom, 0x06DA64, 0xA, 1)
 	#limiter
-	bytereplace(rom, 0x1711A4, 31, 1)
-	bytereplace(rom, 0x171B08, 31, 1)
+	bytereplace_count(rom, 0x1711A4, 31, 1)
+	bytereplace_count(rom, 0x171B08, 31, 1)
+
+	hook(rom, table["item_to_ball"], 0x170D84, 1)
+	hook(rom, table["FT1_use_new_balls"], 0x03E952, 0)
+	hook(rom, table["third_frame_ball_hook"], 0x076AA0, 0)
 
 with open("test.gba", 'rb+') as rom:
 		print("Inserting data")

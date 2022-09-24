@@ -361,6 +361,7 @@ u16 dex_get_searched_pokes(enum dex_mode mode, enum dex_order order, u8 name, u8
 
 const struct crytable* get_cry_ptr(u16 ID, u8 cry_2)
 {
+	ID+=1;
     return cry_2 ? &gCryTable_Reverse[ID] : &gCryTable[ID];
 }
 
