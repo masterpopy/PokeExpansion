@@ -18,5 +18,4 @@ poke_being_viewed_handle_down 080BD9EC 1
 national_to_species 0806D40C 1
 hoenn_pokes_count 080C0844 1
 get_pokecry 080A35A0 1
-get_lowest_evo_stage 08070004 1
 species_to_dex 0806E3C0 1

@@ -361,24 +361,7 @@ u16 dex_get_searched_pokes(enum dex_mode mode, enum dex_order order, u8 name, u8
 
 const struct crytable* get_cry_ptr(u16 ID, u8 cry_2)
 {
-	ID++;
     return cry_2 ? &gCryTable_Reverse[ID] : &gCryTable[ID];
-}
-
-u16 get_lowest_evo_stage(u16 species)
-{
-    for (int i = 1; i < ALL_POKES; i++)
-    {
-        const struct Evolution* evo = gEvolutionTable[i];
-        for (u8 j = 0; j < EVOS_PER_MON; j++)
-        {
-            if (evo[j].targetSpecies ==  i && evo[j].method < 100)
-            {
-                return get_lowest_evo_stage(i);
-            }
-        }
-    }
-    return species;
 }
 
 u16 species_to_dex(u16 species)
