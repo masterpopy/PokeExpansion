@@ -20,13 +20,13 @@ struct crytable{
     u8 field1;
     u8 field2;
     u8 field3;
-    void* cry_ptr;
+    const void* cry_ptr;
     u16 field_8;
     u16 field_A;
 };
 
-extern struct crytable gCryTable[];
-extern struct crytable gCryTable_Reverse[];
+extern const struct crytable gCryTable[];
+extern const struct crytable gCryTable_Reverse[];
 #define ALIGNED(n) __attribute__((aligned(n)))
 struct BaseStats
 {

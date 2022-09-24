@@ -128,6 +128,7 @@ poke_being_viewed_handle_down:
 	
 get_pokecry:
 	mov r1, r9
+	mov r0, r7
 	bl get_cry_ptr
 	ldr r1, =(0x080A3656 | 1)
 	bx r1
