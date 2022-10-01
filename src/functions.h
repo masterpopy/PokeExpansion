@@ -30,5 +30,9 @@ u8 check_if_move_learnt(struct pokemon* poke_addres, u16 move);
 void bag_print_msg(u8 taskID, u8 arg, void* text_ptr, void* callback);
 void TM_boot_sound_and_print(u8 taskID);
 void* Malloc(u32);
+u8 GetLevelUpMovesBySpecies(u16 species, u16 *moves);
+u8 GetEggMoves(struct pokemon *pokemon, u16 *eggMoves);
+u16 GiveMoveToMon(struct pokemon *mon, u16 move);
+void DeleteFirstMoveAndGiveMoveToMon(struct pokemon *mon, u16 move);
 #pragma long_calls_off
 #endif /* VANILLA_FUNCTIONS */

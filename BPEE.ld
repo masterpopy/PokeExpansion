@@ -1291,3 +1291,7 @@ TM_boot_sound_and_print = 0x080FDF90|1;
 bag_remove_item = 0x080D6AA4|1;
 Malloc = 0x08000B38|1;
 nullsub_1485 = 0x08007428|1;
+GetLevelUpMovesBySpecies = 0x0806e204|1;
+GetEggMoves = 0x080703c8|1;
+GiveMoveToMon = 0x08069424|1;
+DeleteFirstMoveAndGiveMoveToMon = 0x08069424|1;

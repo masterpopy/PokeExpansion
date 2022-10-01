@@ -328,4 +328,8 @@ with open(new_rom_name, 'rb+') as rom:
 	clear_from_to(rom, 0x32937C, 0x3299EC) #clear pointers to moves
 	clear_from_to(rom, 0x31ACE8, 0x31AE38)
 	clear_from_to(rom, 0x61C524, 0x61CAAC)
+	#精灵图片
+	clear_from_to(rom, 0xc2fa08, 0xD51DC8)
+	#egg_moves
+	clear_space(rom, 0x032add8, 0x8e6)
 	rom.close()

@@ -33,3 +33,4 @@ fix_TM_swapping 080D6FD8 1
 get_ptrs_for_bag_strings 081AB218 0
 TM_field 080FDF48 1
 delete_tm_after_use 081B6EE0 0
+BuildEggMoveset 08070470 3
