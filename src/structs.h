@@ -275,9 +275,10 @@ extern struct object objects[64];
 
 struct Evolution
 {
-    u16 method;
+    u8 method;
     u16 param;
     u16 targetSpecies;
+	u16 filler;
 };
 
 extern const struct Evolution gEvolutionTable[][EVOS_PER_MON];
