@@ -359,32 +359,21 @@ enum move_comp get_pokemove_compatibility(struct pokemon* poke, u16 itemID, u8 m
         return CAN_LEARN;
 }
 
-u8* bag_ptr_update(u8 max_new, u8 max_old, struct item_ptr* item, void* default_ptr, u8* expanded_ptr)
-{
-    item->max = max_new;
-    if (max_new > max_old)
-    {
-        item->ptr = expanded_ptr;
-        expanded_ptr += (max_new * sizeof(struct item_data));
-    }
-    else
-        item->ptr = default_ptr;
-    return expanded_ptr;
-}
 
 void update_bag_ptrs()
 {
-    u8* expanded_bag = ((u8*) &new_saveblock) + sizeof(new_saveblock);
-    //items pocket
-    expanded_bag = bag_ptr_update(ITEM_POCKET_MAX_NEW, ITEM_POCKET_MAX_OLD, &bag_items_ptrs.items, &sav1_ptr->items_pocket, expanded_bag);
-    //key items pocket
-    expanded_bag = bag_ptr_update(KEY_POCKET_MAX_NEW, KEY_POCKET_MAX_OLD, &bag_items_ptrs.key_items, &sav1_ptr->key_items_pocket, expanded_bag);
-    //balls pocket
-    expanded_bag = bag_ptr_update(BALL_POCKET_MAX_NEW, BALL_POCKET_MAX_OLD, &bag_items_ptrs.balls, &sav1_ptr->balls_pocket, expanded_bag);
-    //TM pocket
-    expanded_bag = bag_ptr_update(TM_POCKET_MAX_NEW, TM_POCKET_MAX_OLD, &bag_items_ptrs.tms, &sav1_ptr->tms_pocket, expanded_bag);
-    //berries pocket
-    expanded_bag = bag_ptr_update(BERRY_POCKET_MAX_NEW, BERRY_POCKET_MAX_OLD, &bag_items_ptrs.berries, &sav1_ptr->berries_pocket, expanded_bag);
+	bag_items_ptrs.items.ptr = &new_saveblock.items_pocket;
+	bag_items_ptrs.balls.ptr = &new_saveblock.balls_pocket;
+	bag_items_ptrs.key_items.ptr = &new_saveblock.key_items_pocket;
+	bag_items_ptrs.berries.ptr = &new_saveblock.berries_pocket;
+	bag_items_ptrs.tms.ptr = &new_saveblock.tms_pocket;
+	
+	bag_items_ptrs.tms.max = TM_POCKET_MAX_NEW;
+	bag_items_ptrs.items.max = ITEM_POCKET_MAX_NEW;
+	bag_items_ptrs.balls.max = BALL_POCKET_MAX_NEW;
+	bag_items_ptrs.key_items.max = KEY_POCKET_MAX_NEW;
+	bag_items_ptrs.berries.max = BERRY_POCKET_MAX_NEW;
+
 }
 
 void get_ptrs_for_bag_strings()
