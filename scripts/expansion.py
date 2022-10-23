@@ -62,7 +62,7 @@ table_names = ["base_stats", "poke_front_img", "poke_back_img", "poke_sprite_pal
 table_ptrs = [0x0001BC, 0x000128, 0x00012C, 0x000130, 0x000134, 0x000138, 0x00013C, 0x000144, 0x06E060, 0x1B2390, 0x0BFA20, 0x06D140, 0x0A5F54, 0x0A5EBC, 0x06E3B4, 0x06EE7C, 0x06EDDC, 0x0C0DBC, 0x0A35EC, 0x0A35DC, 0x0A5FF4, 0x06D534, 0x06D4BC, 0x06D494, 0x06D3FC, 0x17F488, 0x05E7BC]
 sizeofs = [0x1C, 8, 8, 8, 8, 4, 1, 11, 8, 4, 0x20, evos_per_entry * 8, 4, 4, 4, 1, 1, 4, 0xC, 0xC, 1, 2, 2, 2, 2, 1, 4]
 to_repoint = [True, True, True, True, True, True, True, True, TmHmComp_repoint, MoveTutorComp_repoint, True, True, True, True, Movesets_repoint, True, True, True, True, True, True, True, True, True, True, True, True]
-
+to_save_ptrs = ['move_names_table', 'z_move_names_table']
 no_of_names = len(table_names)
 no_of_tables = len(table_ptrs)
 no_of_sizeofs = len(sizeofs)
@@ -322,6 +322,8 @@ with open(new_rom_name, 'rb+') as rom:
 				offset = 0
 			print(table_names[i] + " = " + hex(offset) + ";")
 			offset = repoint_table(rom, offset, i)
+	for name in to_save_ptrs:
+		save_table_ptrs(name, table[name], True)
 	dex_related_bytechanges(rom)
 	clear_from_to(rom, 0x31C898, 0x31D93C)
 	clear_from_to(rom, 0x3230DC, 0x32531C) #clear actual old learnsets

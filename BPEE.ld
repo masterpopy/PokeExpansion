@@ -1271,13 +1271,11 @@ ItemUseOutOfBattle_BlackWhiteFlute = 0x080fe234|1;
 ItemUseOutOfBattle_EnigmaBerry = 0x080fe650|1;
 ItemUseOutOfBattle_PowderJar = 0x080fdca4|1;
 ItemUseOutOfBattle_ReduceEV = 0x080fdebc|1;
-move_name_table = 0x08000148;
 tm_comp_ptr = 0x0806E0B0;
 tutor_comp_ptr = 0x081B2390;
 bag_info = 0x0203CE58;
 script_text_buff1 = 0x02021CC4;
 script_text_buff2 = 0x02021DC4;
-move_name_table = 0x08000148;
 bag_items_ptrs = 0x02039DD8;
 var800E_last_used_item = 0x0203CE7C;
 

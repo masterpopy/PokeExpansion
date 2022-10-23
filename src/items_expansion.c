@@ -288,14 +288,14 @@ u32 check_TM_compatibility2(struct pokemon* poke, u16 TM_id)
 {
     return check_TM_compatibility(get_attributes(poke, ATTR_SPECIES_2, 0), TM_id);
 }
-extern u8 (*move_name_table)[][13];
+extern u8 move_names_table[][13];
 void bag_buffer_item(void* text_buffer, u16 itemID)
 {
     void* string_to_decode;
     switch (bag_info.curr_pocket)
     {
     case 2: //tms and hms
-        strcpy_xFF_terminated_0(&script_text_buff2[0], &(*move_name_table)[get_TM_move(itemID)][0]);
+        strcpy_xFF_terminated_0(&script_text_buff2[0], &move_names_table[get_TM_move(itemID)][0]);
         if (itemID >= FIRST_TM_INDEX + ALL_TMS)
         {
             int_to_string(&script_text_buff1[0], itemID - (FIRST_TM_INDEX + ALL_TMS) + 1, 2, 1);

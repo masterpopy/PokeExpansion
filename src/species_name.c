@@ -1278,3 +1278,5 @@ const u8 gSpeciesNames[][11] = {
     [SPECIES_CALYREX_ICE_RIDER] = _("蕾冠王"),
     [SPECIES_CALYREX_SHADOW_RIDER] = _("蕾冠王"),
 };
+#include "include/moves.h"
+#include "data/move_names.h"
